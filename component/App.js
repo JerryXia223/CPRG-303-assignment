@@ -1,13 +1,19 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import ToDoForm from "./ToDoForm";
+import ToDoList from "./ToDoList";
 
-const app = () => {
+import { useState } from "react";
+function App() {
+  const [tasks, setTasks] = useState(["Do laundry", "Go to gym", "Walk dog"]);
   return (
-    <View>
-      <todolist/>
-      <todoform/>
-    </View>
-  )
+    <SafeAreaView>
+      <ToDoList tasks={tasks} />
+      <ToDoForm />
+    </SafeAreaView>
+  );
 }
 
-export default app
+const styles = StyleSheet.create({});
+
+export default App;
