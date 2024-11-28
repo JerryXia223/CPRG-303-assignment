@@ -1,35 +1,56 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import React from 'react';
+import {SafeAreaView, StyleSheet, View, TextInput, Pressable} from 'react-native';
+import { useState } from 'react';
 
-function ToDoForm() {
+
+export default function ToDoForm({addTask}) {
 
   const [taskText, setTaskText] = useState('');
 
+  handleAddTask = () => {
+    addTask(taskText);
+    setTaskText('');
+  }
+
   return (
-    <View style={styles.form}>
-      <TextInput 
-      style={styles.input} 
-      placeholder="Add a new task..." 
-      onChangeText={(text) => setTaskText(text)}
-      value={taskText}
-      />
-      <Button title="Add Task" onPress={() => addTask(taskText)} />
-    </View>
+    
+
+    <SafeAreaView>
+      <View style={styles.form}>
+        <TextInput
+          style={styles.input}
+          placeholder="Add a new task..."
+          onChangeText={setTaskText}
+          value={taskText}
+        />
+        <Pressable
+                onPress={handleAddTask}
+                style={styles.button}>Add Task
+        </Pressable>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   form: {
     flexDirection: 'row',
-    padding: 10,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginTop: 20,
   },
   input: {
     flex: 1,
-    borderColor: 'gray',
     borderWidth: 1,
+    borderColor: '#ccc',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     marginRight: 10,
-    padding: 5,
+  },
+  button: {
+    borderRadius: 5,
+    backgroundColor: '#ff33ff',
+    padding: 10,
   },
 });
-
-export default ToDoForm;
